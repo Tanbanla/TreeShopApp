@@ -20,6 +20,7 @@ class _RootPageState extends State<RootPage>{
     ProfilePage()
   ];
   List<IconData> iconList = [Icons.home, Icons.favorite, Icons.shopping_cart, Icons.person];
+  //https://youtu.be/4Y10k43UGrU?si=JLAugnIM2aMHBh10
   @override
   Widget build(BuildContext context) {
       return Scaffold(
