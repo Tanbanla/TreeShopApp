@@ -49,6 +49,20 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Text('johndoe@gmail.com', style: TextStyle(color: Constants.blackColor.withOpacity(.3)),),
               const SizedBox(height: 30,),
+              SizedBox(
+                height: size.height * .7,
+                width: size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Row(
+                        
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
