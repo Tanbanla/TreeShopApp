@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
+import 'package:flutter_application_1/models/plants.dart';
 import 'package:flutter_application_1/ui/screens/cart_page.dart';
 import 'package:flutter_application_1/ui/screens/favorite_page.dart';
 import 'package:flutter_application_1/ui/screens/home_page.dart';
@@ -16,14 +17,23 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
+  List<Plant> favorites = [];
+  List<Plant> carts = [];
   int _bottomNavIndex = 0;
 
-  List<Widget> pages = const [
-    HomePage(),
-    FavoritePage(),
-    CartPage(),
-    ProfilePage()
-  ];
+  List<Widget> _widgetOptions() {
+    return [
+      const HomePage(),
+      FavoritePage(
+        favoritedPlants: favorites,
+      ),
+      CartPage(
+        addedToCartPlants: carts,
+      ),
+      const ProfilePage(),
+    ];
+  }
+
   List<IconData> iconList = [
     Icons.home,
     Icons.favorite,
@@ -55,7 +65,7 @@ class _RootPageState extends State<RootPage> {
       ),
       body: IndexedStack(
         index: _bottomNavIndex,
-        children: pages,
+        children: _widgetOptions(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -73,18 +83,21 @@ class _RootPageState extends State<RootPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        splashColor: Constants.primaryColor,
-        activeColor: Constants.primaryColor,
-        inactiveColor: Colors.black.withOpacity(.5),
-        icons: iconList,
-        activeIndex: _bottomNavIndex,
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.sharpEdge,
-        onTap: (index) => setState(() {
-              _bottomNavIndex = index;
-            }
-        )
-      ),
+          splashColor: Constants.primaryColor,
+          activeColor: Constants.primaryColor,
+          inactiveColor: Colors.black.withOpacity(.5),
+          icons: iconList,
+          activeIndex: _bottomNavIndex,
+          gapLocation: GapLocation.center,
+          notchSmoothness: NotchSmoothness.sharpEdge,
+          onTap: (index) => setState(() {
+                _bottomNavIndex = index;
+                final List<Plant> favoritePlants = Plant.getFavoritedPlants();
+                final List<Plant> addedToCartPlants = Plant.addedToCartPlants();
+
+                favorites = favoritePlants;
+                carts = addedToCartPlants.toSet().toList();
+              })),
     );
   }
 }
