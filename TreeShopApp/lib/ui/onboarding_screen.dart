@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants.dart';
-import 'package:flutter_application_1/ui/login_page.dart';
 import 'package:flutter_application_1/ui/root_page.dart';
 
 class OnboardingScreen extends StatefulWidget{
